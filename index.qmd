@@ -63,6 +63,6 @@ Previously, the common way to use both tools, is just run a airflow bashoperator
 
 ![](airflow_screenshot.png)
 
-
+As you can see, it is a work-in-progress project, the transformation step is not finished. The main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and managed workflow using state of the art healthcare data solutions.
 
 

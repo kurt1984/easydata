@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>diag</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <p><img src="index_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
 </div>
 </div>
@@ -218,6 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Apache Airflow is the current standard tool for complex workflow orchestration. Although Airflow and dbt share some similarities, dbt is for transformation step, Airflow is the job scheduler for the whole project. It is difficult to grasp such one tool, let alone make both tools work together. Thanks to <a href="https://www.astronomer.io/cosmos/">Cosmos by Astronomer</a>, now it is much easier to setup and make Airflow and dbt work together more harmoniously.</p>
 <p>Previously, the common way to use both tools, is just run a airflow bashoperator for dbt. It not ideal, since it is difficult to see the DAG inside dbt. Now with Cosmo, one can monitor the whole process including the dbt DAG inside Airflow, as the screenshot for this project shown below.</p>
 <p><img src="airflow_screenshot.png" class="img-fluid"></p>
+<p>As you can see, it is a work-in-progress project, the transformation step is not finished. The main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and managed workflow using state of the art healthcare data solutions.</p>
 
 
 </section>
