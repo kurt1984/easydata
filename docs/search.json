@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Portfolio project",
     "section": "",
-    "text": "TL;DR You can find the project code on GitHub\nThis is Lei’s work-in-progress portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database and conducting transformation using dbt, while the workflow is orchestrated, scheduled and monitored using Apache airflow.\nThe pipeline process is documented using diagram as code tool Diagrams\nCode\nfrom diagrams import Diagram, Cluster\nfrom diagrams.onprem.analytics import Dbt\nfrom diagrams.onprem.database import Postgresql\nfrom diagrams.onprem.workflow import Airflow\nfrom diagrams.generic.storage import Storage\n\nwith Diagram(\"Synthea OMOP CDM ELT Workflow\", show=False) as diag:\n\n    with Cluster(\"Orchestration & Scheduler\"):    \n        Airflow('Apache Airflow')     \n\n    with Cluster(\"Data Pipeline\"):\n        [Storage(\"Synthea \"), Storage(\"Athena Vocab\")] &gt;&gt; Postgresql(\"Postgres\") &gt;&gt; Dbt(\"dbt\") \n\n    \ndiag"
+    "text": "TL;DR You can find the project code on github\nThis is Lei’s work-in-progress portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database and conducting transformation using dbt, while the workflow is orchestrated, scheduled and monitored using Apache airflow.\nThe pipeline process is documented using diagram as code tool Diagrams\nCode\nfrom diagrams import Diagram, Cluster\nfrom diagrams.onprem.analytics import Dbt\nfrom diagrams.onprem.database import Postgresql\nfrom diagrams.onprem.workflow import Airflow\nfrom diagrams.generic.storage import Storage\n\nwith Diagram(\"Synthea OMOP CDM ELT Workflow\", show=False) as diag:\n\n    with Cluster(\"Orchestration & Scheduler\"):    \n        Airflow('Apache Airflow')     \n\n    with Cluster(\"Data Pipeline\"):\n        [Storage(\"Synthea \"), Storage(\"Athena Vocab\")] &gt;&gt; Postgresql(\"Postgres\") &gt;&gt; Dbt(\"dbt\") \n\n    \ndiag"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "This is Lei’s personal website powered by Quarto and github page."
   },
   {
     "objectID": "index.html#subtitle2",
