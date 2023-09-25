@@ -13,6 +13,7 @@ TL;DR You can find the project code on
 - [Dagster app](https://github.com/kurt1984/ELT_OMOP_Dagster)
 
 showcasing:
+
 - Full functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)
 - Realistic healthcare data engineering workflow (Synthea to OMOP-CDM)
 - Options to choose job orchestration tools between Apache Airflow and Dagster
