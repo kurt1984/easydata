@@ -6,28 +6,67 @@ format:
     code-summary: "Show the code"
 ---
 
-TL;DR You can find the project code on [github](https://github.com/kurt1984/synthea_omop_ELT)
+TL;DR You can find the project code on 
 
-This is Lei's work-in-progress portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database and conducting transformation using dbt, while the workflow is orchestrated, scheduled and monitored using Apache airflow.  
+
+- [Airflow app](https://github.com/kurt1984/ELT_OMOP_Airflow)
+- [Dagster app](https://github.com/kurt1984/ELT_OMOP_Dagster)
+
+showcasing:
+- Full functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)
+- Realistic healthcare data engineering workflow (Synthea to OMOP-CDM)
+- Options to choose job orchestration tools between Apache Airflow and Dagster
+
+This is Lei's working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database,  transforming data using dbt and further conducting an interactive data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.
+
 
 The pipeline process is documented using diagram as code tool [Diagrams](https://diagrams.mingrammer.com/)
 
 ```{python}
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 from diagrams import Diagram, Cluster
+from diagrams.custom import Custom
+from urllib.request import urlretrieve
+
 from diagrams.onprem.analytics import Dbt
 from diagrams.onprem.database import Postgresql
 from diagrams.onprem.workflow import Airflow
 from diagrams.generic.storage import Storage
+from diagrams.programming.language import Python
 
 with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
 
-    with Cluster("Orchestration & Scheduler"):    
-        Airflow('Apache Airflow')     
+    # download the icon image file
+    dagster_url = "https://dagster.io/images/brand/logos/dagster-primary-mark.png"
+    dagster_icon = "dagster-primary-mark.png"
+    urlretrieve(dagster_url, dagster_icon)
+
+    with Cluster("Orchestration & Scheduler", direction="LR"):    
+        orchestrator = [Airflow('Apache Airflow'),Custom("Dagster", dagster_icon)]
 
     with Cluster("Data Pipeline"):
-        [Storage("Synthea "), Storage("Athena Vocab")] >> Postgresql("Postgres") >> Dbt("dbt") 
+        dbt = Dbt("dbt") 
+        postgres = Postgresql("Postgres")
+        storage = [Storage("Synthea "), Storage("Athena Vocab")] 
+        storage >> postgres >> dbt
 
-    
+    with Cluster("Data Science App"):
+
+        python = Python("Python")
+
+        plotly_url = "https://upload.wikimedia.org/wikipedia/commons/8/8a/Plotly-logo.png"
+        plotly_icon = "Plotly-logo.png"
+        urlretrieve(plotly_url, plotly_icon)
+
+        plotly = Custom("Plotly", plotly_icon)
+        python >> plotly
+
+
+    orchestrator >> dbt
+    orchestrator >> postgres
+    orchestrator >> python
 diag
 ```
 
@@ -39,9 +78,10 @@ Open sourced [Synthea](https://synthea.mitre.org/) project provides the capabili
 
 [Athena](https://athena.ohdsi.org/search-terms/start) is one of the open sourced tools provided by [OHDSI – Observational Health Data Sciences and Informatics](https://www.ohdsi.org/), greatly simplied the process of converting various medical codes to standard codes. For this project, I downloaded a subset of the codes listed on the website.
 
+
 ## Loading process
 
-At the moment, the csv files from both Synthea and Athena were put in the dbt seeds folder. A better approach is to load the large csv files directly to the database, only store small crosswalks csv in seeds folder.
+Both sets of datasets (csv format) were loaded to duckDB, orchestrated by workflow scheduler (Apache Airflow or Dagster). 
 
 ## Transformation process
 
@@ -55,7 +95,17 @@ This process is complex in nature. To have a good understanding, I went over fol
 - [OHDSI - YouTube](https://www.youtube.com/@OHDSI)
 - [Data Standardization – OHDSI](https://www.ohdsi.org/data-standardization/)
 
+## Data Visualization Application
+
+An interactive data visualization app using plotly is developped. The rendering is triggered by orchestrator (Airflow or Dagster) after the data pipeline has been sucsessfully completed. 
+
+For demonstration purpose, a histogram of year of birth is plotted using OMOP-CDM patient dataset.
+
+![](plotly_screenshot.png)
+
 ## Orchestration and scheduling
+
+### Apache Airflow
 
 Apache Airflow is the current standard tool for complex workflow orchestration. Although Airflow and dbt share some similarities, dbt is for transformation step, Airflow is the job scheduler for the whole project. It is difficult to grasp such one tool, let alone make both tools work together. Thanks to [Cosmos by Astronomer](https://www.astronomer.io/cosmos/), now it is much easier to setup and make Airflow and dbt work together more harmoniously.
 
@@ -63,8 +113,18 @@ Previously, the common way to use both tools, is just run a airflow bashoperator
 
 ![](airflow_screenshot.png)
 
+### Dagster
+
+[Dagster](https://dagster.io/) is another popular data pipeline orchestration tool. It is uniquely fit for data pipeline workflow, since it is based on the notion of asset driven workfow. Any upstream asset modification will automatically notify the downstreams. Unlike Airflow, even the latest Data-aware scheduling feature of Airflow, cannot detect dataset changes themselves. 
+
+Another benefit of using Daster is its lightweight design. Only one node is needed, as comparing to Airflow, which requires four nodes (webserver, scheduler, trigerer, database)
+
+Latest development of Dagster, make it possible to have full observability across pipelines including what's inside dbt, thanks to [dagster-dbt](https://docs.dagster.io/_apidocs/libraries/dagster-dbt)
+
+![](dagster_screenshot.png)
+
 ## Summary
 
-As you can see, it is a work-in-progress project, the transformation step is not finished. The main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and well-managed workflow using state of the art healthcare data solutions.
+This is a . The main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and well-managed workflow using state of the art healthcare data solutions.
 
 

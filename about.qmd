@@ -3,3 +3,7 @@ title: "About"
 ---
 
 This is Lei's personal website powered by Quarto and github page.
+
+More about me:
+
+[Google Scholar Page](https://scholar.google.com/citations?hl=en&user=wOMgAUoAAAAJ)
