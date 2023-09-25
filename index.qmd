@@ -94,6 +94,8 @@ dbt were used for the whole transformation process. It is currently the stands f
 
 The sql codes were adopted from [ETL-Synthea-dbt](https://github.com/sidataplus/ETL-Synthea-dbt/tree/dcb9c262bad32e5d04cd73e4f34a01d884f3e71c) which in turn were adopted from OHDSI tool [OHDSI/ETL-Synthea](https://github.com/OHDSI/ETL-Synthea).
 
+dbt tests were used for each dbt models, as an example for data quality control.
+
 This process is complex in nature. To have a good understanding, I went over following resources:
 
 - [The Book of OHDSI](https://ohdsi.github.io/TheBookOfOhdsi/)

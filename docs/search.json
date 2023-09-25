@@ -25,7 +25,7 @@
     "href": "index.html#transformation-process",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Transformation process",
-    "text": "Transformation process\ndbt were used for the whole transformation process. It is currently the stands for the T step in ETL/ELT process.\nThe sql codes were adopted from ETL-Synthea-dbt which in turn were adopted from OHDSI tool OHDSI/ETL-Synthea.\nThis process is complex in nature. To have a good understanding, I went over following resources:\n\nThe Book of OHDSI\nOHDSI - YouTube\nData Standardization – OHDSI"
+    "text": "Transformation process\ndbt were used for the whole transformation process. It is currently the stands for the T step in ETL/ELT process.\nThe sql codes were adopted from ETL-Synthea-dbt which in turn were adopted from OHDSI tool OHDSI/ETL-Synthea.\ndbt tests were used for each dbt models, as an example for data quality control.\nThis process is complex in nature. To have a good understanding, I went over following resources:\n\nThe Book of OHDSI\nOHDSI - YouTube\nData Standardization – OHDSI"
   },
   {
     "objectID": "index.html#data-visualization-application",
