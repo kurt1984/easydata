@@ -168,3 +168,5 @@ constant.py
 # adhoc files
 /archive/async_test.py
 /.quarto/
+
+adhoc.py

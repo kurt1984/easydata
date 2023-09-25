@@ -25,17 +25,17 @@ The pipeline process is documented using diagram as code tool [Diagrams](https:/
 
 ```{python}
 import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
 
 from diagrams import Diagram, Cluster
 from diagrams.custom import Custom
 from urllib.request import urlretrieve
 
 from diagrams.onprem.analytics import Dbt
-from diagrams.onprem.database import Postgresql
 from diagrams.onprem.workflow import Airflow
 from diagrams.generic.storage import Storage
 from diagrams.programming.language import Python
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
 
@@ -44,14 +44,18 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
     dagster_icon = "dagster-primary-mark.png"
     urlretrieve(dagster_url, dagster_icon)
 
+
+
+    
+
     with Cluster("Orchestration & Scheduler", direction="LR"):    
         orchestrator = [Airflow('Apache Airflow'),Custom("Dagster", dagster_icon)]
 
     with Cluster("Data Pipeline"):
         dbt = Dbt("dbt") 
-        postgres = Postgresql("Postgres")
+        duckdb = Custom("DuckDB", "DuckDB_Logo.png")
         storage = [Storage("Synthea "), Storage("Athena Vocab")] 
-        storage >> postgres >> dbt
+        storage >> duckdb >> dbt
 
     with Cluster("Data Science App"):
 
@@ -66,7 +70,7 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
 
 
     orchestrator >> dbt
-    orchestrator >> postgres
+    orchestrator >> duckdb
     orchestrator >> python
 diag
 ```
