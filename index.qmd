@@ -55,7 +55,7 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
         dbt = Dbt("dbt") 
         duckdb = Custom("DuckDB", "DuckDB_Logo.png")
         storage = [Storage("Synthea "), Storage("Athena Vocab")] 
-        storage >> duckdb >> dbt
+        storage >> duckdb << dbt
 
     with Cluster("Data Science App"):
 
