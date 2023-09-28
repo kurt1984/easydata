@@ -1,10 +1,12 @@
 ---
 title: "Data pipeline ELT project from Synthea to OMOP CDM"
+execute:
+  echo: false
 format:
-  html:
-    code-fold: true
-    code-summary: "Show the code"
+  html
 ---
+
+## Introduction
 
 TL;DR You can find the project code on 
 
@@ -18,10 +20,7 @@ showcasing:
 - Realistic healthcare data engineering workflow (Synthea to OMOP-CDM)
 - Options to choose job orchestration tools between Apache Airflow and Dagster
 
-This is Lei's working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database,  transforming data using dbt and further conducting an interactive data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.
-
-
-The pipeline process is documented using diagram as code tool [Diagrams](https://diagrams.mingrammer.com/)
+This is Lei's working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.
 
 ```{python}
 import ssl
@@ -34,6 +33,7 @@ from diagrams.onprem.analytics import Dbt
 from diagrams.onprem.workflow import Airflow
 from diagrams.generic.storage import Storage
 from diagrams.programming.language import Python
+from diagrams.onprem.analytics import Metabase
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -56,6 +56,7 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
         duckdb = Custom("DuckDB", "DuckDB_Logo.png")
         storage = [Storage("Synthea "), Storage("Athena Vocab")] 
         storage >> duckdb << dbt
+        duckdb << Metabase("Metabase")
 
     with Cluster("Data Science App"):
 
@@ -104,6 +105,9 @@ This process is complex in nature. To have a good understanding, I went over fol
 
 ## Data Visualization Application
 
+A BI Dashboard tool Metabase is connected to the database for interactive data visualization.
+![](metabase_screenshot.png)
+
 An interactive data visualization app using plotly is developped. The rendering is triggered by orchestrator (Airflow or Dagster) after the data pipeline has been sucsessfully completed. 
 
 For demonstration purpose, a histogram of year of birth is plotted using OMOP-CDM patient dataset.
@@ -122,7 +126,7 @@ Previously, the common way to use both tools, is just run a airflow bashoperator
 
 ### Dagster
 
-[Dagster](https://dagster.io/) is another popular data pipeline orchestration tool. It is uniquely fit for data pipeline workflow, since it is based on the notion of asset driven workfow. Any upstream asset modification will automatically notify the downstreams. Unlike Airflow, even the latest Data-aware scheduling feature of Airflow, cannot detect dataset changes themselves. 
+[Dagster](https://dagster.io/) is another popular data pipeline orchestration tool. It is uniquely fit for data pipeline workflow, since it is based on the notion of asset driven workflow. Any upstream asset modification will automatically notify the downstreams. Unlike Airflow, even the latest data-aware scheduling feature of Airflow, cannot detect dataset changes themselves. 
 
 Another benefit of using Daster is its lightweight design. Only one node is needed, as comparing to Airflow, which requires four nodes (webserver, scheduler, trigerer, database)
 
