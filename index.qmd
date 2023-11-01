@@ -19,11 +19,13 @@ showcasing:
 - Fully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)
 - Realistic healthcare data engineering workflow (Synthea to OMOP-CDM)
 - Options to choose job orchestration tools between Apache Airflow and Dagster
+- Data quality checks through Great Expectation and dbt tests.
 
 This is Lei's working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.
 
 ```{python}
 import ssl
+import graphviz
 
 from diagrams import Diagram, Cluster
 from diagrams.custom import Custom
@@ -44,8 +46,10 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
     dagster_icon = "dagster-primary-mark.png"
     urlretrieve(dagster_url, dagster_icon)
 
-
-
+    
+    gx_url = "https://images.ctfassets.net/ycwst8v1r2x5/jbrHhqGtdpbZFhki5MqBp/e6a5f6b567173b39430a1a18d060cb8e/gx_logo_horiz_color.png"
+    gx_icon = "gx-primary-mark.png"
+    urlretrieve(gx_url, gx_icon)
     
 
     with Cluster("Orchestration & Scheduler", direction="LR"):    
@@ -55,7 +59,8 @@ with Diagram("Synthea OMOP CDM ELT Workflow", show=False) as diag:
         dbt = Dbt("dbt") 
         duckdb = Custom("DuckDB", "DuckDB_Logo.png")
         storage = [Storage("Synthea "), Storage("Athena Vocab")] 
-        storage >> duckdb << dbt
+        gx = Custom("Great Expectations", gx_icon)
+        storage >> gx >> duckdb << dbt
         duckdb << Metabase("Metabase")
 
     with Cluster("Data Science App"):
@@ -84,6 +89,7 @@ Open sourced [Synthea](https://synthea.mitre.org/) project provides the capabili
 
 [Athena](https://athena.ohdsi.org/search-terms/start) is one of the open sourced tools provided by [OHDSI – Observational Health Data Sciences and Informatics](https://www.ohdsi.org/), greatly simplied the process of converting various medical codes to standard codes. For this project, I downloaded a subset of the codes listed on the website.
 
+Great Expectations were used for data quality checks. For illustration purpose, the Id in the patients csv file were checked for existence of null value.
 
 ## Loading process
 

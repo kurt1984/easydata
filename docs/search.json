@@ -1,24 +1,31 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is Lei’s personal website powered by Quarto and github page.\nMore about me:\nGoogle Scholar Page"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "",
-    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster."
+    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\n\nWarning: node '55384874f35648b480a8da1e08e648ec', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
   },
   {
     "objectID": "index.html#introduction",
     "href": "index.html#introduction",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "",
-    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster."
+    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\n\nWarning: node '55384874f35648b480a8da1e08e648ec', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
   },
   {
     "objectID": "index.html#extraction-process",
     "href": "index.html#extraction-process",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Extraction process",
-    "text": "Extraction process\nOpen sourced Synthea project provides the capability of generating realistic synthetic EMR data, and downloadable data in various formats. The csv files has been used in this project.\nAthena is one of the open sourced tools provided by OHDSI – Observational Health Data Sciences and Informatics, greatly simplied the process of converting various medical codes to standard codes. For this project, I downloaded a subset of the codes listed on the website."
+    "text": "Extraction process\nOpen sourced Synthea project provides the capability of generating realistic synthetic EMR data, and downloadable data in various formats. The csv files has been used in this project.\nAthena is one of the open sourced tools provided by OHDSI – Observational Health Data Sciences and Informatics, greatly simplied the process of converting various medical codes to standard codes. For this project, I downloaded a subset of the codes listed on the website.\nGreat Expectations were used for data quality checks. For illustration purpose, the Id in the patients csv file were checked for existence of null value."
   },
   {
     "objectID": "index.html#loading-process",
@@ -54,12 +61,5 @@
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Summary",
     "text": "Summary\nThe main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and well-managed workflow using state of the art healthcare data solutions."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This is Lei’s personal website powered by Quarto and github page.\nMore about me:\nGoogle Scholar Page"
   }
 ]
