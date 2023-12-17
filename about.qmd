@@ -1,5 +1,6 @@
 ---
 title: "About"
+image: profile.jpg
 ---
 
 This is Lei's personal website powered by Quarto and github page.

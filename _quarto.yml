@@ -5,16 +5,21 @@ project:
 website:
   title: "easydata"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
+    search: true
+    right:
       - about.qmd
-
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
 format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
+
+
+
+
 
 
 

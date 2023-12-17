@@ -1,65 +1,72 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This is Lei’s personal website powered by Quarto and github page.\nMore about me:\nGoogle Scholar Page"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "posts/elt_omop/index.html",
+    "href": "posts/elt_omop/index.html",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "",
-    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\n\nWarning: node '55384874f35648b480a8da1e08e648ec', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
+    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\nimport ssl\nimport graphviz\n\nfrom diagrams import Diagram, Cluster\nfrom diagrams.custom import Custom\nfrom urllib.request import urlretrieve\n\nfrom diagrams.onprem.analytics import Dbt\nfrom diagrams.onprem.workflow import Airflow\nfrom diagrams.generic.storage import Storage\nfrom diagrams.programming.language import Python\nfrom diagrams.onprem.analytics import Metabase\n\nssl._create_default_https_context = ssl._create_unverified_context\n\nwith Diagram(\"Synthea OMOP CDM ELT Workflow\", show=False) as diag:\n\n    # download the icon image file\n    dagster_url = \"https://dagster.io/images/brand/logos/dagster-primary-mark.png\"\n    dagster_icon = \"dagster-primary-mark.png\"\n    urlretrieve(dagster_url, dagster_icon)\n\n    \n    gx_url = \"https://images.ctfassets.net/ycwst8v1r2x5/jbrHhqGtdpbZFhki5MqBp/e6a5f6b567173b39430a1a18d060cb8e/gx_logo_horiz_color.png\"\n    gx_icon = \"gx-primary-mark.png\"\n    urlretrieve(gx_url, gx_icon)\n    \n\n    with Cluster(\"Orchestration & Scheduler\", direction=\"LR\"):    \n        orchestrator = [Airflow('Apache Airflow'),Custom(\"Dagster\", dagster_icon)]\n\n    with Cluster(\"Data Pipeline\"):\n        dbt = Dbt(\"dbt\") \n        duckdb = Custom(\"DuckDB\", \"DuckDB_Logo.png\")\n        storage = [Storage(\"Synthea \"), Storage(\"Athena Vocab\")] \n        gx = Custom(\"Great Expectations\", gx_icon)\n        storage &gt;&gt; gx &gt;&gt; duckdb &lt;&lt; dbt\n        duckdb &lt;&lt; Metabase(\"Metabase\")\n\n    with Cluster(\"Data Science App\"):\n\n        python = Python(\"Python\")\n\n        plotly_url = \"https://upload.wikimedia.org/wikipedia/commons/8/8a/Plotly-logo.png\"\n        plotly_icon = \"Plotly-logo.png\"\n        urlretrieve(plotly_url, plotly_icon)\n\n        plotly = Custom(\"Plotly\", plotly_icon)\n        python &gt;&gt; plotly\n\n\n    orchestrator &gt;&gt; dbt\n    orchestrator &gt;&gt; duckdb\n    orchestrator &gt;&gt; python\ndiag\n\nWarning: node 'f702db90456d4c2d95e9439299a8cbc5', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
   },
   {
-    "objectID": "index.html#introduction",
-    "href": "index.html#introduction",
+    "objectID": "posts/elt_omop/index.html#introduction",
+    "href": "posts/elt_omop/index.html#introduction",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "",
-    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\n\nWarning: node '55384874f35648b480a8da1e08e648ec', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
+    "text": "TL;DR You can find the project code on\n\nAirflow app\nDagster app\n\nshowcasing:\n\nFully functional real world ELT data pipeline to data science app orchestration with full observability (whole pipeline including DAGs inside dbt)\nRealistic healthcare data engineering workflow (Synthea to OMOP-CDM)\nOptions to choose job orchestration tools between Apache Airflow and Dagster\nData quality checks through Great Expectation and dbt tests.\n\nThis is Lei’s working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.\n\nimport ssl\nimport graphviz\n\nfrom diagrams import Diagram, Cluster\nfrom diagrams.custom import Custom\nfrom urllib.request import urlretrieve\n\nfrom diagrams.onprem.analytics import Dbt\nfrom diagrams.onprem.workflow import Airflow\nfrom diagrams.generic.storage import Storage\nfrom diagrams.programming.language import Python\nfrom diagrams.onprem.analytics import Metabase\n\nssl._create_default_https_context = ssl._create_unverified_context\n\nwith Diagram(\"Synthea OMOP CDM ELT Workflow\", show=False) as diag:\n\n    # download the icon image file\n    dagster_url = \"https://dagster.io/images/brand/logos/dagster-primary-mark.png\"\n    dagster_icon = \"dagster-primary-mark.png\"\n    urlretrieve(dagster_url, dagster_icon)\n\n    \n    gx_url = \"https://images.ctfassets.net/ycwst8v1r2x5/jbrHhqGtdpbZFhki5MqBp/e6a5f6b567173b39430a1a18d060cb8e/gx_logo_horiz_color.png\"\n    gx_icon = \"gx-primary-mark.png\"\n    urlretrieve(gx_url, gx_icon)\n    \n\n    with Cluster(\"Orchestration & Scheduler\", direction=\"LR\"):    \n        orchestrator = [Airflow('Apache Airflow'),Custom(\"Dagster\", dagster_icon)]\n\n    with Cluster(\"Data Pipeline\"):\n        dbt = Dbt(\"dbt\") \n        duckdb = Custom(\"DuckDB\", \"DuckDB_Logo.png\")\n        storage = [Storage(\"Synthea \"), Storage(\"Athena Vocab\")] \n        gx = Custom(\"Great Expectations\", gx_icon)\n        storage &gt;&gt; gx &gt;&gt; duckdb &lt;&lt; dbt\n        duckdb &lt;&lt; Metabase(\"Metabase\")\n\n    with Cluster(\"Data Science App\"):\n\n        python = Python(\"Python\")\n\n        plotly_url = \"https://upload.wikimedia.org/wikipedia/commons/8/8a/Plotly-logo.png\"\n        plotly_icon = \"Plotly-logo.png\"\n        urlretrieve(plotly_url, plotly_icon)\n\n        plotly = Custom(\"Plotly\", plotly_icon)\n        python &gt;&gt; plotly\n\n\n    orchestrator &gt;&gt; dbt\n    orchestrator &gt;&gt; duckdb\n    orchestrator &gt;&gt; python\ndiag\n\nWarning: node 'f702db90456d4c2d95e9439299a8cbc5', graph 'Synthea OMOP CDM ELT Workflow' size too small for label"
   },
   {
-    "objectID": "index.html#extraction-process",
-    "href": "index.html#extraction-process",
+    "objectID": "posts/elt_omop/index.html#extraction-process",
+    "href": "posts/elt_omop/index.html#extraction-process",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Extraction process",
     "text": "Extraction process\nOpen sourced Synthea project provides the capability of generating realistic synthetic EMR data, and downloadable data in various formats. The csv files has been used in this project.\nAthena is one of the open sourced tools provided by OHDSI – Observational Health Data Sciences and Informatics, greatly simplied the process of converting various medical codes to standard codes. For this project, I downloaded a subset of the codes listed on the website.\nGreat Expectations were used for data quality checks. For illustration purpose, the Id in the patients csv file were checked for existence of null value."
   },
   {
-    "objectID": "index.html#loading-process",
-    "href": "index.html#loading-process",
+    "objectID": "posts/elt_omop/index.html#loading-process",
+    "href": "posts/elt_omop/index.html#loading-process",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Loading process",
     "text": "Loading process\nBoth sets of datasets (csv format) were loaded to duckDB, orchestrated by workflow scheduler (Apache Airflow or Dagster)."
   },
   {
-    "objectID": "index.html#transformation-process",
-    "href": "index.html#transformation-process",
+    "objectID": "posts/elt_omop/index.html#transformation-process",
+    "href": "posts/elt_omop/index.html#transformation-process",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Transformation process",
     "text": "Transformation process\ndbt were used for the whole transformation process. It is currently the stands for the T step in ETL/ELT process.\nThe sql codes were adopted from ETL-Synthea-dbt which in turn were adopted from OHDSI tool OHDSI/ETL-Synthea.\ndbt tests were used for each dbt models, as an example for data quality control.\nThis process is complex in nature. To have a good understanding, I went over following resources:\n\nThe Book of OHDSI\nOHDSI - YouTube\nData Standardization – OHDSI"
   },
   {
-    "objectID": "index.html#data-visualization-application",
-    "href": "index.html#data-visualization-application",
+    "objectID": "posts/elt_omop/index.html#data-visualization-application",
+    "href": "posts/elt_omop/index.html#data-visualization-application",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Data Visualization Application",
     "text": "Data Visualization Application\nA BI Dashboard tool Metabase is connected to the database for interactive data visualization. \nAn interactive data visualization app using plotly is developped. The rendering is triggered by orchestrator (Airflow or Dagster) after the data pipeline has been sucsessfully completed.\nFor demonstration purpose, a histogram of year of birth is plotted using OMOP-CDM patient dataset."
   },
   {
-    "objectID": "index.html#orchestration-and-scheduling",
-    "href": "index.html#orchestration-and-scheduling",
+    "objectID": "posts/elt_omop/index.html#orchestration-and-scheduling",
+    "href": "posts/elt_omop/index.html#orchestration-and-scheduling",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Orchestration and scheduling",
     "text": "Orchestration and scheduling\n\nApache Airflow\nApache Airflow is the current standard tool for complex workflow orchestration. Although Airflow and dbt share some similarities, dbt is for transformation step, Airflow is the job scheduler for the whole project. It is difficult to grasp such one tool, let alone make both tools work together. Thanks to Cosmos by Astronomer, now it is much easier to setup and make Airflow and dbt work together more harmoniously.\nPreviously, the common way to use both tools, is just run a airflow bashoperator for dbt. It is not ideal, since it is difficult to see the DAG inside dbt. Now with Cosmo, one can monitor the whole process including the dbt DAG inside Airflow, as the screenshot for this project shown below.\n\n\n\nDagster\nDagster is another popular data pipeline orchestration tool. It is uniquely fit for data pipeline workflow, since it is based on the notion of asset driven workflow. Any upstream asset modification will automatically notify the downstreams. Unlike Airflow, even the latest data-aware scheduling feature of Airflow, cannot detect dataset changes themselves.\nAnother benefit of using Daster is its lightweight design. Only one node is needed, as comparing to Airflow, which requires four nodes (webserver, scheduler, trigerer, database)\nLatest development of Dagster, make it possible to have full observability across pipelines including what’s inside dbt, thanks to dagster-dbt"
   },
   {
-    "objectID": "index.html#summary",
-    "href": "index.html#summary",
+    "objectID": "posts/elt_omop/index.html#summary",
+    "href": "posts/elt_omop/index.html#summary",
     "title": "Data pipeline ELT project from Synthea to OMOP CDM",
     "section": "Summary",
     "text": "Summary\nThe main purpose of this project is to showcasing the knowledge and skills involved in producing a tailor-made and well-managed workflow using state of the art healthcare data solutions."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "myblog",
+    "section": "",
+    "text": "Data pipeline ELT project from Synthea to OMOP CDM\n\n\n\n\n\n\n\ndata engineering\n\n\n\n\n\n\n\n\n\n\n\nNov 17, 2023\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is Lei’s personal website powered by Quarto and github page.\nMore about me:\nGoogle Scholar Page"
   }
 ]
