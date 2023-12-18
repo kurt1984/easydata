@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/penguins/index.html",
       "/posts/fl_math/index.html",
       "/posts/elt_omop/index.html"
     ]
