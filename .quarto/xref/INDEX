@@ -7,5 +7,11 @@
   },
   "posts/elt_omop/index.qmd": {
     "index.html": "13468e0d"
+  },
+  "posts/fl_math/index.qmd": {
+    "index.html": "0ac99b10"
+  },
+  "posts/fl_math/index.ipynb": {
+    "index.html": "9f70c701"
   }
 }

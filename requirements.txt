@@ -1,0 +1,14 @@
+requests
+numpy
+pandas
+matplotlib
+ipykernel
+ipywidgets
+jupyter
+duckdb
+jupysql
+duckdb-engine # for jupysql
+seaborn
+ipyvizzu
+great_tables
+xlrd # for excel

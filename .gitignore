@@ -170,3 +170,4 @@ constant.py
 /.quarto/
 
 adhoc.py
+/env/
