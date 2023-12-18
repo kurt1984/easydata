@@ -1,5 +1,10 @@
 ---
 title: "Penguins"
+
+date: "2023-12-17"
+categories: [data science]
+image: "lter_penguins.png"
+
 format:
   html:
     toc: false
