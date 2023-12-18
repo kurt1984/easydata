@@ -3,6 +3,10 @@ title: "Data pipeline ELT project from Synthea to OMOP CDM"
 date: "2023-11-17"
 categories: [data engineering]
 image: "synthea_omop_cdm_elt_workflow.png"
+format:
+  html:
+    echo: false
+    keep-hidden: true
 ---
 
 ## Introduction
@@ -23,6 +27,7 @@ showcasing:
 This is Lei's working portfolio project, illustrating a realistic data pipeline implemented from extracting electronic medical records (EMR), various medical vocabularies, loading onto a database, transforming data using dbt and further connecting to a BI tool Metabase and generating a data science report. while the workflow is orchestrated, scheduled and monitored with full oberverability using Apache airflow or Dagster.
 
 ```{python}
+#| warning: false
 import ssl
 import graphviz
 

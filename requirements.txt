@@ -12,3 +12,5 @@ seaborn
 ipyvizzu
 great_tables
 xlrd # for excel
+graphviz
+diagrams

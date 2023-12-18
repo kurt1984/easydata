@@ -1,7 +1,7 @@
 ---
 title: "Penguins"
 
-date: "2023-12-17"
+date: "2023-12-18"
 categories: [data science]
 image: "lter_penguins.png"
 
